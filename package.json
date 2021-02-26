@@ -4,6 +4,7 @@
   "description": "Super Mario Bros clone using html canvas and ES6.",
   "main": "index.js",
   "scripts": {
+    "start": "serve ./public",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -15,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/JimmyP29/Super-Mario-Bros/issues"
   },
-  "homepage": "https://github.com/JimmyP29/Super-Mario-Bros#readme"
+  "homepage": "https://github.com/JimmyP29/Super-Mario-Bros#readme",
+  "dependencies": {
+    "serve": "^11.3.2"
+  }
 }
