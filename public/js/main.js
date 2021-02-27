@@ -8,9 +8,14 @@ const context = canvas.getContext('2d');
 
 function createSpriteLayer(sprite, pos) {
     return function drawSpriteLayer(context) {
-        for (let i = 0; i < 20; ++i) {
-            sprite.draw('idle', context, pos.x + i * 16, pos.y);
-        }
+        sprite.draw('idle', context, pos.x, pos.y);
+    }
+}
+
+class Vec2 {
+    constructor(x, y) {
+        this.x = x;
+        this.y = y;
     }
 }
 
@@ -25,10 +30,10 @@ Promise.all([
         const backgroundLayer = createBackgroundLayer(level.backgrounds, backgroundSprites);
         comp.layers.push(backgroundLayer);
 
-        const pos = {
-            x: 0,
-            y: 0
-        };
+        const gravity = 0.5;
+        
+        const pos = new Vec2(64, 180);
+        const vel = new Vec2(2, -10);
 
         const spriteLayer = createSpriteLayer(marioSprite, pos);
         comp.layers.push(spriteLayer);
@@ -36,9 +41,9 @@ Promise.all([
         function update() {
             comp.draw(context);
 
-            pos.x += 2;
-            pos.y += 2;
-
+            pos.x += vel.x;
+            pos.y += vel.y;
+            vel.y += gravity;
             requestAnimationFrame(update);
         }
 
