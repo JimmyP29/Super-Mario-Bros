@@ -26,15 +26,21 @@ Promise.all([
         const spriteLayer = createSpriteLayer(mario);
         comp.layers.push(spriteLayer);
 
-        const deltaTime = 1/60;
+        const deltaTime = 1 / 60;
+        let accumulatedTime = 0;
         let lastTime = 0;
 
         function update(time) {
-           // deltaTime = (time - lastTime) / 1000;
-            
-            comp.draw(context);
-            mario.update(deltaTime);
-            mario.vel.y += gravity;
+            accumulatedTime = (time - lastTime) / 1000;
+
+            while (accumulatedTime > deltaTime) {
+                comp.draw(context);
+                mario.update(deltaTime);
+                mario.vel.y += gravity;
+
+                accumulatedTime -= deltaTime;
+            }
+
             requestAnimationFrame(update);
 
             lastTime = time;
