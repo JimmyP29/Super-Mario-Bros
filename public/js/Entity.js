@@ -1,11 +1,11 @@
 import { Vec2 } from './math.js';
 
 export class Trait {
-    constructor(name){
+    constructor(name) {
         this.NAME = name;
     }
 
-    update(){
+    update() {
         console.warn('Unhandled update call in trait');
     }
 }
@@ -18,12 +18,12 @@ export default class Entity {
         this.traits = [];
     }
 
-    addTrait(trait){
+    addTrait(trait) {
         this.traits.push(trait);
         this[trait.NAME] = trait;
     }
 
-    update(deltaTime){
+    update(deltaTime) {
         this.traits.forEach(trait => {
             trait.update(this, deltaTime);
         });
