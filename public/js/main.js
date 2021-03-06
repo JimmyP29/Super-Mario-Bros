@@ -12,13 +12,10 @@ Promise.all([
     loadLevel('1-1'),
 ])
     .then(([mario, level]) => {
-        const gravity = 2000;
         mario.pos.set(64, 64);
-
 
         level.entities.add(mario);
         level.comp.layers.push(createCollisionLayer(level));
-
 
         const input = setupKeyboard(mario);
         input.listenTo(window);
@@ -38,7 +35,6 @@ Promise.all([
         timer.update = function update(deltaTime) {
             level.update(deltaTime);
             level.comp.draw(context);
-            mario.vel.y += gravity * deltaTime;
         }
 
         timer.start();
