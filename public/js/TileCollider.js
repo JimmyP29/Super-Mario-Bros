@@ -69,9 +69,5 @@ export default class TileCollider {
 
     test(entity) {
         this.checkY(entity);
-        // const match = this.tiles.matchByPosition(entity.pos.x, entity.pos.y);
-        // if (match) {
-        //     console.log('Matched tile', match, match.tile);
-        // }
     }
 }
