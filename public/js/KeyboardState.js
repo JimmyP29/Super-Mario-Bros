@@ -6,18 +6,18 @@ export default class KeyboardState {
         // Holds the current state of a givcen key
         this.keyStates = new Map();
 
-        // Holds the callback functions for a keycode
+        // Holds the callback functions for a code
         this.keyMap = new Map();
     }
 
-    addMapping(keyCode, callback) {
-        this.keyMap.set(keyCode, callback);
+    addMapping(code, callback) {
+        this.keyMap.set(code, callback);
     }
 
     handleEvent(event) {
-        const { keyCode, type } = event;
+        const { code, type } = event;
 
-        if (!this.keyMap.has(keyCode)) {
+        if (!this.keyMap.has(code)) {
             // Does not have the key mapped
             return false;
         }
@@ -26,13 +26,13 @@ export default class KeyboardState {
 
         const keyState = type === 'keydown' ? PRESSED : RELEASED;
 
-        if (this.keyStates.get(keyCode) === keyState) {
+        if (this.keyStates.get(code) === keyState) {
             return;
         }
 
-        this.keyStates.set(keyCode, keyState);
+        this.keyStates.set(code, keyState);
         console.log(this.keyStates);
-        this.keyMap.get(keyCode)(keyState);
+        this.keyMap.get(code)(keyState);
     }
 
     listenTo(window) {
